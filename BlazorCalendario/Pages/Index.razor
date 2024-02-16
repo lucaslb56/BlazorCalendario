@@ -29,6 +29,10 @@
         text-decoration: underline;
         margin-bottom: 10px;
     }
+
+    th {
+        max-width: 30px;
+    }
 </style>
 
 <PageTitle>Index</PageTitle>
@@ -59,14 +63,26 @@
                         <input type="date" style="width:100%;"/>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-4">
                         <label>Assunto: </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" placeholder="Assunto"/>
+                        <input type="text" style="width:100%;" placeholder="Assunto..." />
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Local: </label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" style="width:100%;" placeholder="Local..." />
+                    </div>
+                </div>
+
+
                 <div class="row" style="margin-bottom:10px;">
                     <div class="col-md-6">
                     </div>
@@ -83,7 +99,7 @@
 <select @onchange="CarregarCalendario">
     @foreach (string nomeMes in nomeMeses)
     {
-        <option>@nomeMes.ToUpper()</option>
+        <option>@nomeMes</option>
     }
 </select>
 
@@ -134,7 +150,25 @@
 
     protected override void OnInitialized()
     {
+        // Crie a lista original de meses
         nomeMeses = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames.ToList();
+
+        // Obtenha o mês atual
+        int mesAtual = DateTime.Now.Month;
+
+        // Ajuste a lista de meses
+        List<string> mesesAjustados = new List<string>();
+        for (int i = 1; i < mesAtual; i++)
+        {
+            mesesAjustados.Add(nomeMeses[i - 1]);
+        }
+        mesesAjustados.Add(nomeMeses[mesAtual - 1]);
+        for (int i = mesAtual + 1; i <= 12; i++)
+        {
+            mesesAjustados.Add(nomeMeses[i - 1]);
+        }
+        nomeMeses = mesesAjustados;
+
         CriarCabecalhoCalendario();
         CriarCorpoCalendario();
     }
