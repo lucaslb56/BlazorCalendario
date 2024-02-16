@@ -144,7 +144,7 @@
     List<string> nomeMeses = new List<string>();
     List<string> dias = new List<string>();
     List<Semana> semana = new List<Semana>();
-    DateTime dataIncio = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+    DateTime dataIncio = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.MinValue.Month);
     DateTime dataFinal = (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).AddMonths(1).AddDays(-1);
 
 

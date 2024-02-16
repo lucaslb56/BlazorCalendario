@@ -2,7 +2,7 @@
 
 namespace BlazorCalendario.IService
 {
-    public interface IEventoDiaervice
+    public interface IEventoDiaService
     {
         EventoDia SalvarOuAtualizar(EventoDia eventoDia);
         EventoDia GetEvento(DateTime dataEvento);
